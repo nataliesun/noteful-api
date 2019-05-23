@@ -16,8 +16,8 @@ notesRouter
             .catch(next)
     })
     .post(jsonParser, (req, res, next) => {
-        const { name, content, folder_id } = req.body
-        const newNote = { name, content, folder_id }
+        const { note_name, content, folder_id } = req.body
+        const newNote = { note_name, content, folder_id }
 
         for (const [key, value] of Object.entries(newNote)) {
             if (value == null) {
@@ -52,7 +52,7 @@ notesRouter
                 }
                 res.json({
                     id: note.id,
-                    name: xss(note.name), // sanitize name
+                    note_name: xss(note.note_name), // sanitize name
                     content: xss(note.content), // sanitize content
                     date_modified: note.date_modified,
                     folder_id: folder_id
